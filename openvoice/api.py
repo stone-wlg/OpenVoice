@@ -104,7 +104,8 @@ class ToneColorConverter(OpenVoiceBaseClass):
 
         if kwargs.get('enable_watermark', True):
             import wavmark
-            self.watermark_model = wavmark.load_model().to(self.device)
+            path = kwargs.get('watermark_path', '/app/wavmark/step59000_snr39.99_pesq4.35_BERP_none0.30_mean1.81_std1.81.model.pkl')
+            self.watermark_model = wavmark.load_model(path=path).to(self.device)
         else:
             self.watermark_model = None
         self.version = getattr(self.hps, '_version_', "v1")
